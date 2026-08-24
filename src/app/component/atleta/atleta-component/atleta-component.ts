@@ -17,6 +17,7 @@ export class AtletaComponent {
   id = 0
   nome = ''
   cpf = 0
+  data_nascimento = ''
   sexo = ''
   cep = 0
   rua_logradouro = ''
@@ -29,10 +30,9 @@ export class AtletaComponent {
 
   //DECLARAÇÃO DO CONSTRUTOR  
   constructor(
-    private atletaService: AtletaService, 
-    private route: ActivatedRoute, 
-    private cdr: ChangeDetectorRef) 
-    { }
+    private atletaService: AtletaService,
+    private route: ActivatedRoute,
+    private cdr: ChangeDetectorRef) { }
 
   //DECLARAÇÃO DE FUNÇÕES
   exibeDados() {
@@ -55,6 +55,7 @@ export class AtletaComponent {
           this.id = objAtleta.id
           this.nome = objAtleta.nome
           this.cpf = objAtleta.cpf
+          this.data_nascimento = objAtleta.data_nascimento
           this.sexo = objAtleta.sexo
           this.cep = objAtleta.cep
           this.rua_logradouro = objAtleta.rua_logradouro
@@ -75,6 +76,7 @@ export class AtletaComponent {
     const pessoaAtleta = new Atleta()
     pessoaAtleta.nome = this.nome
     pessoaAtleta.cpf = this.cpf
+    pessoaAtleta.data_nascimento = this.data_nascimento
     pessoaAtleta.sexo = this.sexo
     pessoaAtleta.cep = this.cep
     pessoaAtleta.rua_logradouro = this.rua_logradouro
@@ -94,7 +96,7 @@ export class AtletaComponent {
         })
     } else {
       pessoaAtleta.id = this.idAtleta
-      
+
       this.atletaService.alterarAtleta(pessoaAtleta)
         .subscribe({
           next: (resposta) => {
@@ -128,6 +130,7 @@ export class AtletaComponent {
   limparAtributos() {
     this.nome = ''
     this.cpf = 0
+    this.data_nascimento = ''
     this.sexo = ''
     this.cep = 0
     this.rua_logradouro = ''
