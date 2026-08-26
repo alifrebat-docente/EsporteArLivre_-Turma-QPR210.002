@@ -32,7 +32,8 @@ describe('AtletaListaComponent', () => {
   });
 
   it('Resultado esperado a lista de atletas', () => {
-    const atletas: Atleta[] = [{
+    const atletas: Atleta[] = [
+      {
       "nome": "Rute",
       "cpf": 78945612300,
       "sexo": "",
