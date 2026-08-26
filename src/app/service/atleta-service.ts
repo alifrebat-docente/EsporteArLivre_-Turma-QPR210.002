@@ -12,17 +12,17 @@ export class AtletaService {
 
   //ADICIONAR NA API
   adicionarAtleta(atleta: Atleta): Observable<Atleta> {
-    const urlApi = `https://6a7f6d923183f5fd884b1a61.mockapi.io/esportearlivre/atleta`
-    //const urlApi = `http://127.0.0.1:8000/atleta/`
+    //const urlApi = `https://6a7f6d923183f5fd884b1a61.mockapi.io/esportearlivre/atleta`
+    const urlApi = `http://127.0.0.1:8000/pessoa/`
 
     return this.http.post<Atleta>(urlApi, atleta)
   }
 
   //LISTAR ATLETAS NA API
   listarAtletas(): Observable<Atleta[]> {
-    const urlApi = `https://6a7f6d923183f5fd884b1a61.mockapi.io/esportearlivre/atleta`
+    // const urlApi = `https://6a7f6d923183f5fd884b1a61.mockapi.io/esportearlivre/atleta`
 
-    //const  urlApi = `http://127.0.0.1:8000/atleta/`
+    const urlApi = `http://127.0.0.1:8000/pessoa/`
 
     return this.http.get<Atleta[]>(urlApi)
   }
@@ -38,7 +38,7 @@ export class AtletaService {
   //EXCLUIR NA API
   exluirAtleta(atleta: Atleta): Observable<Atleta> {
     const urlApi = `https://6a7f6d923183f5fd884b1a61.mockapi.io/esportearlivre/atleta/${atleta.id}`
-    //const urlApi = `http://127.0.0.1:8000/atleta/${atleta.id}`
+    //const urlApi = `http://127.0.0.1:8000/pessoa/${atleta.id}`
 
     return this.http.delete<Atleta>(urlApi)
   }
@@ -47,7 +47,7 @@ export class AtletaService {
   alterarAtleta(atleta: Atleta): Observable<Atleta> {
     const urlApi = `https://6a7f6d923183f5fd884b1a61.mockapi.io/esportearlivre/atleta/${atleta.id}`
 
-    //const urlApi = `http://127.0.0.1:8000/atleta/${atleta.id}`
+    //const urlApi = `http://127.0.0.1:8000/pessoa/${atleta.id}`
 
     return this.http.put<Atleta>(urlApi, atleta)
   }
@@ -73,6 +73,32 @@ export class AtletaService {
     }
 
     return idade
+  }
+
+  //CALCULO IMC
+  calcularIMC(atleta: Atleta) {
+    return atleta.peso / (atleta.altura * atleta.altura)
+  }
+
+  //SITUAÇÃO IMC
+  situacaoIMC(imc: number) {
+    let situacao = ''
+
+    if (imc <= 18.5) {
+      situacao = 'Abaixo do Peso'
+    } else if (imc <= 24.9) {
+      situacao = 'Normal'
+    } else if (imc <= 29.9) {
+      situacao = 'Sobrepeso'
+    } else if (imc <= 34.9) {
+      situacao = 'Obesidade I'
+    } else if (imc <= 39.9) {
+      situacao = 'Obesidade II (Severa)'
+    } else {
+      situacao = 'Obesidade III (Mórbida)'
+    }
+
+    return situacao
   }
 
   /*
