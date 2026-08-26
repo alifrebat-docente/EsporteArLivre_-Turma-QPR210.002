@@ -14,6 +14,7 @@ export class AtletaListaComponent {
   //DECLARAÇÃO ARRAY DO TIPO PESSOA
   //listaAtletas: Atleta[] = []
   listaAtletas = signal<Atleta[]>([])
+  imc = 0
 
   //DECLARAÇÃO CONSTRUTOR
   constructor(private router: Router, private http: AtletaService) { }
@@ -40,35 +41,44 @@ export class AtletaListaComponent {
   }
 
   //EXCLUIR ATLETA
-  excluirAtleta(atleta: Atleta){
-    if(confirm(`Deseja excluir ${atleta.nome} da competição? `)){
+  excluirAtleta(atleta: Atleta) {
+    if (confirm(`Deseja excluir ${atleta.nome} da competição? `)) {
       this.http.exluirAtleta(atleta)
-      .subscribe({
-        next:(dados)=>{
-           this.listaAtletas.update(elem =>
-            elem.filter(a => a.id !== atleta.id)
-          );
-          
-          console.log('Atleta excluído com Sucesso ', dados)
-        },
-        error: (msgErro) => {
-          console.log("Erro ao Excluir  o atleta ", msgErro)
-        }
-      })
+        .subscribe({
+          next: (dados) => {
+            this.listaAtletas.update(elem =>
+              elem.filter(a => a.id !== atleta.id)
+            );
+
+            console.log('Atleta excluído com Sucesso ', dados)
+          },
+          error: (msgErro) => {
+            console.log("Erro ao Excluir  o atleta ", msgErro)
+          }
+        })
 
     }
-    
+
     this.ngOnInit()
   }
 
   //ALTERAR DADOS
-  buscarPessoa(idAtleta: Atleta){
+  buscarPessoa(idAtleta: Atleta) {
     this.router.navigate(['/cadastroatleta', idAtleta.id])
   }
 
-  calcIdade(data_nascimento: string){
+  calcIdade(data_nascimento: string) {
     return this.http.calcularIdade(data_nascimento)
   }
 
-  
+  calcImc(atleta: Atleta) {
+    this.imc = this.http.calcularIMC(atleta)
+    return this.imc
+  }
+
+  sitIMC(imc: number) {
+    return this.http.situacaoIMC(imc)
+  }
+
+
 }//FIM COMPONENT AtletaListaComponent
