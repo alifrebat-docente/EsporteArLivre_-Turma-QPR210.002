@@ -36,9 +36,9 @@ export class AtletaService {
   }
 
   //EXCLUIR NA API
-  exluirAtleta(atleta: Atleta): Observable<Atleta> {
-    const urlApi = `https://6a7f6d923183f5fd884b1a61.mockapi.io/esportearlivre/atleta/${atleta.id}`
-    //const urlApi = `http://127.0.0.1:8000/pessoa/${atleta.id}`
+  excluirAtleta(atleta: Atleta): Observable<Atleta> {
+    //const urlApi = `https://6a7f6d923183f5fd884b1a61.mockapi.io/esportearlivre/atleta/${atleta.id}`
+    const urlApi = `http://127.0.0.1:8000/pessoa/${atleta.id}`
 
     return this.http.delete<Atleta>(urlApi)
   }
