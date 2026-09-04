@@ -45,12 +45,12 @@ export class CorridaComponent {
     const corrida = new Corrida()
     corrida.descricao_corrida = this.descricao_corrida
     corrida.data_corrida = this.data_corrida
-    corrida.distancia5km = this.distancia5km
-    corrida.distancia10km = this.distancia10km
-    corrida.distancia25km = this.distancia25km
+    corrida.distancia_5km = this.distancia5km
+    corrida.distancia_10km = this.distancia10km
+    corrida.distancia_25km = this.distancia25km
 
     if (this.editar) {
-      corrida.id = this.idCorrida
+      corrida.idcorrida = this.idCorrida
       
       this.corridaService.alterarCorrida(corrida)
         .subscribe({
@@ -63,6 +63,8 @@ export class CorridaComponent {
         })
 
     } else {
+
+
       this.corridaService.salvarCorrida(corrida)
         .subscribe({
           next: (respostaAPI) => {
@@ -84,9 +86,9 @@ export class CorridaComponent {
         next: (dadosCorrida) => {
           this.descricao_corrida = dadosCorrida.descricao_corrida
           this.data_corrida = dadosCorrida.data_corrida
-          this.distancia5km = dadosCorrida.distancia5km
-          this.distancia10km = dadosCorrida.distancia10km
-          this.distancia25km = dadosCorrida.distancia25km
+          this.distancia5km = dadosCorrida.distancia_5km
+          this.distancia10km = dadosCorrida.distancia_10km
+          this.distancia25km = dadosCorrida.distancia_25km
 
           this.cdr.detectChanges()
         },
